@@ -1,10 +1,11 @@
 package com.example.arce.instagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.arce.instagram.model.Post;
 import com.parse.FindCallback;
@@ -18,14 +19,25 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     //private static final String imageUrl= "/storage/emulated/0/DCIM/Camera/IMG_20180710_131547.jpg";
-    private EditText descriptionInput;
+/*    private EditText descriptionInput;
     private Button createBtn;
-    private Button refreshBtn;
+    private Button refreshBtn;*/
+
+    private Button cameraBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        cameraBtn = findViewById(R.id.btnCamera);
+
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this,PhotoActivity.class);
+                startActivity(i);
+            }
+        });
 
 /*        descriptionInput = findViewById(R.id.etDesc);
         createBtn = findViewById(R.id.btnCreate);
