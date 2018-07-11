@@ -2,8 +2,11 @@ package com.example.arce.instagram;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +19,9 @@ import com.parse.SaveCallback;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity {
 
     //private static final String imageUrl= "/storage/emulated/0/DCIM/Camera/IMG_20180710_131547.jpg";
@@ -23,13 +29,15 @@ public class HomeActivity extends AppCompatActivity {
     private Button createBtn;
     private Button refreshBtn;*/
 
-    private Button cameraBtn;
+    @BindView(R.id.btnCamera)Button cameraBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        cameraBtn = findViewById(R.id.btnCamera);
+        ButterKnife.bind(this);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +46,27 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        // do something here
+                        return true;
+                    case R.id.action_logOut:
+                        // do something here
+                        return true;
+                    case R.id.action_photo:
+                        // do something here
+                        return true;
+                        default:
+                            return true;
+                }
+            }
+        });
+
+        // PostAdapter adapter = new
 
 /*        descriptionInput = findViewById(R.id.etDesc);
         createBtn = findViewById(R.id.btnCreate);

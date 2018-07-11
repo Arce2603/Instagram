@@ -12,19 +12,21 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private EditText userInput;
-    private EditText passwordInput;
-    private Button loginBtn;
+
+    @BindView (R.id.etUser)EditText userInput;
+    @BindView (R.id.etPassword)EditText passwordInput;
+    @BindView(R.id.btnLogin)Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        userInput = findViewById(R.id.etUser);
-        passwordInput = findViewById(R.id.etPassword);
-        loginBtn = findViewById(R.id.btnLogin);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

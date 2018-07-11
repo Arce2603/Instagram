@@ -5,4 +5,5 @@
     <string name="log_in">LOG IN</string>
     <string name="password">password</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="take">Take</string>
 </resources>
