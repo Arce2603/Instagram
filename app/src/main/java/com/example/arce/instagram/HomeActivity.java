@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button refreshBtn;*/
 
     @BindView(R.id.btnCamera)Button cameraBtn;
-
+    @BindView(R.id.log_out)Button logOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,15 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this,LogoutActivity.class);
+                startActivity(i);
+            }
+        });
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView (R.id.etUser)EditText userInput;
     @BindView (R.id.etPassword)EditText passwordInput;
     @BindView(R.id.btnLogin)Button loginBtn;
+    @BindView(R.id.btnSign) Button signUpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //TODO SIGN UP CHECK!
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String username = userInput.getText().toString();
+                final String password = passwordInput.getText().toString();
+
+               // signUp(username,password);
+            }
+        });
+
     }
 
+    //Method used for login to an already existing account
     private void login(String username, String password){
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
@@ -51,11 +65,31 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Log.d("LOGIN", "Failure");
-                    e.printStackTrace();;
+                    e.printStackTrace();
                 }
             }
         });
+    }
 
+    private void signUp(String username, String password){
+        // Create the ParseUser
+        ParseUser user = new ParseUser();
+        // Set core properties
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail("a@gmail.com");
 
+        // Invoke signUpInBackground
+        user.signUpInBackground(new SignUpCallback() {
+
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("Sign", "Successfull");
+                } else {
+                    Log.d("Sign", "FAIL");
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
