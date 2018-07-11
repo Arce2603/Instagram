@@ -60,11 +60,9 @@ public class PhotoActivity extends AppCompatActivity {
         postBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                File f = getPhotoFileUri(mCurrentPhotoPath);
                 ParseFile parseFile = new ParseFile(photoFile);
 
                 post.setImage(parseFile);
-                //TODO retrieve it correctly
                 post.setUser(ParseUser.getCurrentUser());
                 post.setDescription(etCaption.getText().toString());
 
