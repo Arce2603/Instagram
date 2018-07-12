@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     PostAdapter adapter;
     boolean mFirstLoad=true;
     static final int POLL_INTERVAL = 1000; // milliseconds
-    
+
     SwipeRefreshLayout swipeContainer;
 
     @Override
