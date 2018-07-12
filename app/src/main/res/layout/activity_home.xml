@@ -47,6 +47,5 @@
             android:layout_height="378dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
-
-    </RelativeLayout>
+         </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

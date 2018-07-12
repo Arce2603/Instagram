@@ -50,7 +50,6 @@ public class PhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
         postBtn.setVisibility(View.INVISIBLE);
-        //takeBtn.setBackgroundResource(R.drawable.camera_shadow_fill);
 
         takeBtn.setOnClickListener(new View.OnClickListener() {
             @Override

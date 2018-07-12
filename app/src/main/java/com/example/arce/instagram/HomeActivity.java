@@ -113,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.action_photo:
                         // do something here
                         return true;
-                        default:
+                    default:
                             return true;
                 }
             }
