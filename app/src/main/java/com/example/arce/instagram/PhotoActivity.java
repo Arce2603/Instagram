@@ -49,6 +49,8 @@ public class PhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
+        postBtn.setVisibility(View.INVISIBLE);
+        //takeBtn.setBackgroundResource(R.drawable.camera_shadow_fill);
 
         takeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +72,7 @@ public class PhotoActivity extends AppCompatActivity {
                     @Override
                     public void done(ParseException e) {
                         if(e == null) {
-                            Toast.makeText(PhotoActivity.this, "Successfully created post on Parse",
-                                    Toast.LENGTH_SHORT).show();
+                            finish();
                         } else {
                             Log.e("SUBMIT", "Failed to save message", e);
                         }
@@ -134,12 +135,13 @@ public class PhotoActivity extends AppCompatActivity {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // RESIZE BITMAP, see section below
+
+                //TODO RESIZE IT!!!
                 // Load the taken image into a preview
                 ivImage.setImageBitmap(takenImage);
 
-
-
                // galleryAddPic();
+                postBtn.setVisibility(View.VISIBLE);
 
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();

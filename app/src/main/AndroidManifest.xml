@@ -41,7 +41,8 @@
         </provider>
 
         <activity android:name=".PhotoActivity" />
-        <activity android:name=".LogoutActivity"></activity>
+        <activity android:name=".LogoutActivity" />
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

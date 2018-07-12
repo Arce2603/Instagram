@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -29,26 +30,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = userInput.getText().toString();
-                final String password = passwordInput.getText().toString();
+        if (ParseUser.getCurrentUser()!=null){
+            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(i);
+        }
 
-                login(username,password);
-            }
-        });
+        else {
+            loginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = userInput.getText().toString();
+                    final String password = passwordInput.getText().toString();
 
-        //TODO SIGN UP CHECK!
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = userInput.getText().toString();
-                final String password = passwordInput.getText().toString();
+                    login(username, password);
+                }
+            });
 
-               // signUp(username,password);
-            }
-        });
+            //TODO SIGN UP CHECK!
+            signUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = userInput.getText().toString();
+                    final String password = passwordInput.getText().toString();
+
+                     signUp(username,password);
+                }
+            });
+        }
 
     }
 
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
                 else{
+                    Toast.makeText(MainActivity.this,"Username or password does not match",Toast.LENGTH_LONG).show();
                     Log.d("LOGIN", "Failure");
                     e.printStackTrace();
                 }
@@ -71,19 +80,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void signUp(String username, String password){
+    private void signUp(final String username, final String password){
         // Create the ParseUser
         ParseUser user = new ParseUser();
         // Set core properties
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail("a@gmail.com");
 
         // Invoke signUpInBackground
         user.signUpInBackground(new SignUpCallback() {
 
             public void done(ParseException e) {
                 if (e == null) {
+                    login(username,password);
                     Log.d("Sign", "Successfull");
                 } else {
                     Log.d("Sign", "FAIL");
