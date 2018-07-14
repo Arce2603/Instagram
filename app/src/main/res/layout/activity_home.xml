@@ -13,25 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".HomeActivity">
 
-        <Button
-            android:id="@+id/btnCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="80dp"
-            android:layout_marginStart="45dp"
-            android:text="@string/take" />
-
-        <Button
-            android:id="@+id/log_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/btnCamera"
-            android:layout_marginEnd="50dp"
-            android:text="Log out" />
-
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
@@ -44,8 +25,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvPosts"
             android:layout_width="match_parent"
-            android:layout_height="378dp"
+            android:layout_height="455dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
-         </RelativeLayout>
+    </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

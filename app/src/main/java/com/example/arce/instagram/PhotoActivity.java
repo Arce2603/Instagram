@@ -7,9 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +82,28 @@ public class PhotoActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        intent = new Intent(PhotoActivity.this,HomeActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.action_logOut:
+                        intent = new Intent(PhotoActivity.this,LogoutActivity.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.action_photo:
+                        return true;
+                    default:
+                        return true;
+                }
             }
         });
 

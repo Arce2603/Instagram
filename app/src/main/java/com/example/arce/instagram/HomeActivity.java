@@ -11,8 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.arce.instagram.model.Post;
 import com.parse.FindCallback;
@@ -29,8 +27,6 @@ public class HomeActivity extends AppCompatActivity {
 
     static final int MAX_CHAT_MESSAGES_TO_SHOW = 25;
 
-    @BindView(R.id.btnCamera)Button cameraBtn;
-    @BindView(R.id.log_out)Button logOut;
     @BindView(R.id.rvPosts) RecyclerView rvPosts;
     ArrayList<Post> myPosts;
     PostAdapter adapter;
@@ -44,6 +40,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.nux_dayone_landing_logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         swipeContainer=(SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         //swipe container listener
@@ -64,27 +65,10 @@ public class HomeActivity extends AppCompatActivity {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-
        // final String User = ParseUser.getCurrentUser().getObjectId();
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         myHandler.postDelayed(mRefreshMessagesRunnable, POLL_INTERVAL);
-
-        cameraBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this,PhotoActivity.class);
-                startActivity(i);
-            }
-        });
-
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this,LogoutActivity.class);
-                startActivity(i);
-            }
-        });
 
         //initialize ArrayList and Adapter
         myPosts = new ArrayList<>();
@@ -100,15 +84,17 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
                 switch (item.getItemId()) {
                     case R.id.action_home:
-                        // do something here
                         return true;
                     case R.id.action_logOut:
-                        // do something here
+                        intent = new Intent(HomeActivity.this,LogoutActivity.class);
+                        startActivity(intent);
                         return true;
                     case R.id.action_photo:
-                        // do something here
+                        intent = new Intent(HomeActivity.this,PhotoActivity.class);
+                        startActivity(intent);
                         return true;
                     default:
                             return true;
@@ -117,6 +103,30 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+
+    /*
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
+        myPosts = new ArrayList<>();
+        adapter = new PostAdapter(myPosts);
+    }
+
+    public View onCreateView LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_home, parent, false);
+
+        @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //Recycler view setup (layout manager and adapter)
+        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        //set the adapter
+        rvPosts.setAdapter(adapter);
+         swipeContainer=(SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+    }
+     */
 
     public void fetchTimelineAsync(int page) {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
